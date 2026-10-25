@@ -1,0 +1,71 @@
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+*.pyd
+*.pyo
+*.pdb
+
+# ── Virtual environments ──────────────────────────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+.env/
+
+# ── Distribution / packaging ──────────────────────────────────────────────────
+build/
+dist/
+*.egg-info/
+*.egg
+MANIFEST
+.eggs/
+
+# ── Testing & coverage ────────────────────────────────────────────────────────
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+.nox/
+
+# ── Type-checking ─────────────────────────────────────────────────────────────
+.mypy_cache/
+.pytype/
+.pyre/
+
+# ── Databases / pipeline output ───────────────────────────────────────────────
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+
+# ── Reports (generated output — add to VCS only if explicitly tracking) ───────
+reports/*.json
+reports/*.html
+reports/*.md
+
+# ── Secrets & credentials ─────────────────────────────────────────────────────
+.env
+*.env
+.env.*
+secrets.yaml
+secrets.json
+api_keys.txt
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+
+# ── Editor / OS ───────────────────────────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
