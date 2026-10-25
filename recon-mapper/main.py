@@ -63,19 +63,31 @@ def _register_modules(pipeline: Pipeline) -> None:
     TODO: Replace stubs with real module imports as each is implemented.
     """
     # ── Passive ────────────────────────────────────────────────────────────
-    from modules.passive.subdomain_enum import run as subdomain_enum_run
-    from modules.passive.whois_dns import run as whois_dns_run
-    pipeline.register("passive", subdomain_enum_run)
-    pipeline.register("passive", whois_dns_run)
-    # TODO: from modules.passive.shodan_lookup import run as shodan_run
-    # TODO: from modules.passive.github_dork   import run as github_dork_run
-    # TODO: pipeline.register("passive", shodan_run)
-    # TODO: pipeline.register("passive", github_dork_run)
+    try:
+        from modules.passive.subdomain_enum import run as subdomain_enum_run
+        pipeline.register("passive", subdomain_enum_run)
+    except ImportError as exc:
+        logging.getLogger(__name__).debug("passive.subdomain_enum unavailable: %s", exc)
+
+    try:
+        from modules.passive.whois_dns import run as whois_dns_run
+        pipeline.register("passive", whois_dns_run)
+    except ImportError as exc:
+        logging.getLogger(__name__).debug("passive.whois_dns unavailable: %s", exc)
 
     # ── Active ─────────────────────────────────────────────────────────────
-    # TODO: from modules.active.port_scan   import run as port_scan_run
+    try:
+        from modules.active.port_scan import run as port_scan_run
+        pipeline.register("active", port_scan_run)
+    except ImportError as exc:
+        logging.getLogger(__name__).debug("active.port_scan unavailable: %s", exc)
+
+    try:
+        from modules.active.service_fingerprint import run as service_fingerprint_run
+        pipeline.register("active", service_fingerprint_run)
+    except ImportError as exc:
+        logging.getLogger(__name__).debug("active.service_fingerprint unavailable: %s", exc)
     # TODO: from modules.active.http_probe  import run as http_probe_run
-    # TODO: pipeline.register("active", port_scan_run)
     # TODO: pipeline.register("active", http_probe_run)
 
     # ── Surface ────────────────────────────────────────────────────────────
@@ -87,11 +99,6 @@ def _register_modules(pipeline: Pipeline) -> None:
     # TODO: from modules.vuln_indicators.header_audit import run as header_run
     # TODO: pipeline.register("vuln_indicators", cve_run)
     # TODO: pipeline.register("vuln_indicators", header_run)
-
-    logging.getLogger(__name__).warning(
-        "No modules are registered yet — scaffold only.  "
-        "See _register_modules() in main.py for TODO stubs."
-    )
 
 
 # ---------------------------------------------------------------------------
